@@ -1,0 +1,43 @@
+.class{
+    background-color: aquamarine;
+}
+
+form{
+    margin: 0;
+    position: absolute;
+    width: 250px;
+    top: 50%;
+    left: 50%;
+    /* text-align: center; */
+    /* 设置水平垂直居中 */
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+h1{
+    text-align: center;
+}
+
+label{
+    display:block;
+}
+
+input{
+    height: 40px;
+    width: 100%;
+    margin: 8px  0;
+    /* display: inline-block; */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display:block;
+}
+
+input[type=Submit]{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+p{
+    text-align: center;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="asserts/css/empList.css" th:href="@{/asserts/css/empList.css}" rel="stylesheet">
+    <link href="/asserts/js/jquery-3.4.1.js" th:href="@{/webjars/jquery/3.4.1/jquery.js}" rel="script">
+    <script type="text/javascript" src="asserts/js/jquery-3.4.1.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+<!--    <link href="" th:href="@{/webjars/bootstrap/4.4.1-1/css/bootstrap.css}" rel="stylesheet">-->
+<!--    会修改默认的table属性-->
+</head>
+<body>
+    <div class="header">
+        <div class="user">
+            <p> <a href="admin_datils" th:text="${session.loginUser}">用户名+头像</a></p>
+        </div>
+        <div class="function">
+            <a href="/emp"><button>添加</button></a>
+            <div class="search">
+                <input type="text" name="findDatils" placeholder="工号/姓名">
+                <!--图片的尺寸可以再标签里面设计好-->
+                <img th:src="@{/asserts/images/find.jfif}" alt="搜索">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="dept">
+            <a id="all" href="/emps">总览</a>
+            <ul th:each="dept:${dpts}">
+                <li><a th:href="@{/emps/}+${dept.getDName()}" th:text="${dept.getDName()}">部门</a></li>
+            </ul>
+        </div>
+        <div class="list">
+            <!--#id .class  标签名-->
+            <table id="emps_table">
+                <tr>
+                    <th>工号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>邮箱</th>
+                    <th>部门</th>
+                    <th>选项</th>
+                </tr>
+                <tbody>
+                    <tr th:each="emp:${emps}">
+                        <td th:text="${emp.getId()}"></td>
+                        <td th:text="${emp.getName()}"></td>
+                        <td th:text="${emp.getSex()}"></td>
+                        <td th:text="${#dates.format(emp.getBirthday(),'yyyy/mm/dd')}">
+                        <td th:text="${emp.getEmail()}"></td>
+                        <td th:text="${emp.getDept()}"></td>
+                        <td>
+                            <a th:href="@{/emp}" class="bt_change">修改</a>
+                            <button class="bt_delete" th:attr="delete_uri=@{/emp/}+${emp.getId()}">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <form id="deleteEmp" method="post">
+        <input type="hidden" name="_method" value="delete">
+    </form>
+
+    <script>
+        $(".bt_delete").click(function () {
+            $("#deleteEmp").attr("action",$(this).attr("delete_uri")).submit();
+        });
+    </script>
+<!--    HiddenHttpMethodFilter 在spring boot 2.0 之后默认关闭了，需要在application配置文件里手动开启
+         yml:  mvc:
+                hiddenmethod:
+                 filter:
+                    enabled: true-->
+</body>
+</html>

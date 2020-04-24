@@ -1,0 +1,41 @@
+
+
+spring:
+  #2.0之后默认关闭了
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  datasource:
+    username: root
+    password: forever
+    url: jdbc:mysql://localhost:3306/mysql_db?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,slf4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    #    自动建表
+    #    schema:
+    #      - classpath:Emp.sql
+    #默认不起作用，需要配置
+  thymeleaf:
+    cache: false
+  messages:
+    basename: i18n.login
+#  mvc:
+#    static-path-pattern: /static/**
+#  如果使用自定义的路径，默认加载路径资源会失效
