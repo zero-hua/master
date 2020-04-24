@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forever</title>
+    <link href="add.css" th:href="@{/asserts/css/add.css}" rel="stylesheet">
+</head>
+<body>
+    <!--此页面兼顾修改和添加页面
+        添加页面为普通表单
+        修改页面需要查出被修改的员工的信息进行回显以便修改
+        区分：根据修改时拥有Employee对象而增加时没有进行区分
+        thymeleaf th:if
+        用post方法模拟put请求
+        在 th:if 方法所处的标签，true则生效
+        -->
+    <form th:action="@{/emp}" method="post">
+        <input type="hidden" name="_method" value="put" th:if="${employee!=null}">
+        <input type="hidden" name="id" th:if="${employee!=null}" th:value="${employee.getId()}">
+        <input type="text" name="name" placeholder="员工名" th:value="${employee!=null}?${employee.getName()}">
+        <input type="radio" name="sex" value="男" th:checked="${employee!=null} and ${employee.getSex()=='男'}?checked">男
+        <input type="radio" name="sex" value="女" th:checked="${employee!=null} and ${employee.getSex()=='女'}?checked">女
+        <input type="text" name="birthday" placeholder="生日" th:value="${employee!=null}?${#dates.format(employee.getBirthday(),'yyyy/MM/dd')}">
+<!--        dates.format(employee.getBirthday(),'yyyy/MM/dd') 你是爹 yyyy/MM/dd 大小写错了你都是儿子！！！！
+            后台数据库存储也要注意 会默认减一天 22 会变 23-->
+        <input type="text" name="email" placeholder="邮箱" th:value="${employee!=null}?${employee.getEmail()}">
+        <input type="text" name="dept" placeholder="部门" th:value="${employee!=null}?${employee.getDept()}">
+        <input type="submit" th:value="${employee!=null}?确认修改:确认增加" value="确认修改" >
+    </form>
+<!--    <form th:action="@{/emp}" method="post">-->
+<!--        <input type="hidden" name="_method" value="put" th:if="${employee!=null}">-->
+<!--        <input type="hidden" name="id" th:value="${employee!=null}?${employee.getId()}">-->
+<!--        <input type="text" name="name" placeholder="员工名" th:value="${employee!=null}?${employee.getName()}">-->
+<!--        <input type="radio" name="sex" value="男">男-->
+<!--        <input type="radio" name="sex" value="女">女-->
+<!--        <input type="text" name="birthday" placeholder="生日">-->
+<!--        <input type="text" name="email" placeholder="邮箱">-->
+<!--        <input type="text" name="dept" placeholder="部门">-->
+<!--        <input type="submit" value="添加">-->
+<!--    </form>-->
+</body>
+</html>

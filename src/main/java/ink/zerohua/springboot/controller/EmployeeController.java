@@ -54,16 +54,16 @@ public class EmployeeController {
 
     @GetMapping("/emp/{id}")
     public String findEmpById(@PathVariable("id") Integer id,Model model){
-        System.out.println("执行了查询一个");
+        System.out.println("查询了一个");
         Employee employee = empMapper.findEmpById(id);
         model.addAttribute("employee",employee);
-        return "empList";
+        return "emp/addAndChange";
     }
 
     @GetMapping("/emp")
     public String toAddPage(){
         System.out.println("来到增加页面");
-        return "emp/add";
+        return "emp/addAndChange";
     }
 
     @PostMapping("/emp")
@@ -75,10 +75,11 @@ public class EmployeeController {
     }
 
     @PutMapping("/emp")
-    public String update(){
+    public String update(Employee employee){
         System.out.println("修改了员工");
-        //empMapper.updateEmp(employee);
-        return "empList";
+        System.out.println(employee.toString());
+        empMapper.updateEmp(employee);
+        return "emp/empList";
     }
 
     @DeleteMapping("/emp/{id}")

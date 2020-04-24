@@ -48,11 +48,11 @@
                         <td th:text="${emp.getId()}"></td>
                         <td th:text="${emp.getName()}"></td>
                         <td th:text="${emp.getSex()}"></td>
-                        <td th:text="${#dates.format(emp.getBirthday(),'yyyy/mm/dd')}">
+                        <td th:text="${#dates.format(emp.getBirthday(),'yyyy/MM/dd')}">
                         <td th:text="${emp.getEmail()}"></td>
                         <td th:text="${emp.getDept()}"></td>
                         <td>
-                            <a th:href="@{/emp}" class="bt_change">修改</a>
+                            <a th:href="@{/emp/}+${emp.getId()}" class="bt_change">修改</a>
                             <button class="bt_delete" th:attr="delete_uri=@{/emp/}+${emp.getId()}">删除</button>
                         </td>
                     </tr>

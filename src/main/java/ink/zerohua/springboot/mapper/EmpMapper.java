@@ -18,7 +18,7 @@ public interface EmpMapper {
     @Delete("delete from employee where id=#{id}")
     public void deleteEmpById(Integer id);
 
-    @Update("update empployee set name=#{name},sex=#{sex},age=#{age},email=#{email},dept=#{dept} where id=#{id}")
+    @Update("update employee set name=#{name},sex=#{sex},birthday=#{birthday},email=#{email},dept=#{dept} where id=#{id}")
     public void updateEmp(Employee employee);
 
     @Select("select * from employee")

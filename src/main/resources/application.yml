@@ -1,8 +1,10 @@
 
 
 spring:
-  #2.0之后默认关闭了
   mvc:
+#    不加会显示格式错误
+    date-format: yyyy/MM/dd
+    #2.0之后默认关闭了
     hiddenmethod:
       filter:
         enabled: true

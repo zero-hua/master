@@ -11,7 +11,7 @@ import java.util.Date;
 @Getter
 @ToString
 public class Employee implements Serializable {
-    private String id;
+    private Integer id;
     private String name;
     private String sex;
     private Date birthday;
