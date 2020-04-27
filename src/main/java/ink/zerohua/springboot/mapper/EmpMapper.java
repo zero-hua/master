@@ -11,7 +11,7 @@ import java.util.List;
 public interface EmpMapper {
 
     //使用自动生成主键
-    @Options(useGeneratedKeys = true,keyProperty = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into employee(name,sex,birthday,email,dept) values(#{name},#{sex},#{birthday},#{email},#{dept})")
     public int addEmp(Employee employee);
 
@@ -29,4 +29,7 @@ public interface EmpMapper {
 
     @Select("select * from employee where id=#{id}")
     public Employee findEmpById(Integer id);
+
+    @Select("select * from employee where name=#{name}")
+    public List<Employee> findEmpByName(String name);
 }

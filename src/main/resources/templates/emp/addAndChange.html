@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forever</title>
-    <link href="add.css" th:href="@{/asserts/css/add.css}" rel="stylesheet">
+    <link href="add.css" th:href="@{/asserts/css/addAndCheck.css}" rel="stylesheet">
 </head>
 <body>
     <!--此页面兼顾修改和添加页面
@@ -14,30 +14,40 @@
         thymeleaf th:if
         用post方法模拟put请求
         在 th:if 方法所处的标签，true则生效
-        -->
+        1 dates.format(employee.getBirthday(),'yyyy/MM/dd') 你是爹 yyyy/MM/dd 大小写错了你都是儿子！！！！
+        2 后台数据库存储也要注意 会默认减一天 22 会变 23
+    -->
     <form th:action="@{/emp}" method="post">
-        <input type="hidden" name="_method" value="put" th:if="${employee!=null}">
-        <input type="hidden" name="id" th:if="${employee!=null}" th:value="${employee.getId()}">
-        <input type="text" name="name" placeholder="员工名" th:value="${employee!=null}?${employee.getName()}">
-        <input type="radio" name="sex" value="男" th:checked="${employee!=null} and ${employee.getSex()=='男'}?checked">男
-        <input type="radio" name="sex" value="女" th:checked="${employee!=null} and ${employee.getSex()=='女'}?checked">女
-        <input type="text" name="birthday" placeholder="生日" th:value="${employee!=null}?${#dates.format(employee.getBirthday(),'yyyy/MM/dd')}">
-<!--        dates.format(employee.getBirthday(),'yyyy/MM/dd') 你是爹 yyyy/MM/dd 大小写错了你都是儿子！！！！
-            后台数据库存储也要注意 会默认减一天 22 会变 23-->
-        <input type="text" name="email" placeholder="邮箱" th:value="${employee!=null}?${employee.getEmail()}">
-        <input type="text" name="dept" placeholder="部门" th:value="${employee!=null}?${employee.getDept()}">
-        <input type="submit" th:value="${employee!=null}?确认修改:确认增加" value="确认修改" >
+            <input type="hidden" name="_method" value="put" th:if="${employee!=null}">
+            <input type="hidden" name="id" th:if="${employee!=null}" th:value="${employee.getId()}">
+        <div>
+            <span>姓名：</span>
+            <input type="text" class="base" name="name"  th:value="${employee!=null}?${employee.getName()}">
+        </div>
+        <div class="select_sex">
+            <span>性别：</span>
+            <label for="male">男</label>
+            <input type="radio"  id="male" name="sex" value="男" th:checked="${employee!=null} and ${employee.getSex()=='男'}?checked">
+            <label for="female">女</label>
+            <input type="radio"  id="female" name="sex" value="女" th:checked="${employee!=null} and ${employee.getSex()=='女'}?checked">
+        </div>
+        <div>
+            <span>生日：</span>
+            <input type="text" class="base" name="birthday" placeholder="例如:2000/08/01" th:value="${employee!=null}?${#dates.format(employee.getBirthday(),'yyyy/MM/dd')}">
+        </div>
+        <div>
+            <span>邮箱：</span>
+            <input type="text" class="base" name="email"  th:value="${employee!=null}?${employee.getEmail()}">
+        </div>
+        <div>
+            <span>部门：</span>
+            <select class="base" name="dept" >
+                <option th:value="${dept.getDName()}" th:each="dept:${depts}" th:selected="${employee!=null} and ${employee.getDept()==dept.getDName()}?selected">[[${dept.getDName()}]]</option>
+            </select>
+        </div>
+        <div>
+         <input type="submit" class="sub" th:value="${employee!=null}?确认修改:确认增加" value="确认修改" >
+        </div>
     </form>
-<!--    <form th:action="@{/emp}" method="post">-->
-<!--        <input type="hidden" name="_method" value="put" th:if="${employee!=null}">-->
-<!--        <input type="hidden" name="id" th:value="${employee!=null}?${employee.getId()}">-->
-<!--        <input type="text" name="name" placeholder="员工名" th:value="${employee!=null}?${employee.getName()}">-->
-<!--        <input type="radio" name="sex" value="男">男-->
-<!--        <input type="radio" name="sex" value="女">女-->
-<!--        <input type="text" name="birthday" placeholder="生日">-->
-<!--        <input type="text" name="email" placeholder="邮箱">-->
-<!--        <input type="text" name="dept" placeholder="部门">-->
-<!--        <input type="submit" value="添加">-->
-<!--    </form>-->
 </body>
 </html>

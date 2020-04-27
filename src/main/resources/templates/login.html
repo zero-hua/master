@@ -14,6 +14,9 @@
             <!-- 如果仅仅是为了文本在元素内居中对齐，可以使用 text-align: center; -->
             <!--"for" 属性可把 label 绑定到另外一个元素。请把 "for" 属性的值设置为相关元素的 id 属性的值。-->
             <h1 th:text="#{login.welcome}">欢 迎</h1>
+            <div th:if="${msg!=null}">
+                <p th:text="${msg}" style="color: red"></p>
+            </div>
             <label for="username" th:text="#{login.userName}">用户名</label>
             <input type="text" id="username" placeholder="电话/邮箱/会员名" name="username">
 

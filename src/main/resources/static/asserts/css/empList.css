@@ -6,6 +6,10 @@
 
 }
 
+a{
+    text-decoration: none;
+}
+
 body{
     background-color: #DEE1E6;
 }
@@ -17,71 +21,86 @@ body{
 
 .container{
     width: 100%;
-    height: 700px;
 }
 
 /* height不能继承body
-    display:block 是每个标签成为独立的一个块，换行输出 ,相当于<br>*/
+    display:block 是每个标签成为独立的一个块，换行输出 ,相当于<br>
+    子元素继承父元素的属性，如有相同，则覆盖*/
+a:link{
+    color:white;
+}
+
 
 .user{
-    width: 20%; 
+    width: 15%;
     height: 100%;
-    background-color: yellow;
+    background-color: #265380;
+    border-bottom: black 1px solid;
     float: left;
     text-align: center;
 }
 
 .user p{
-    border: 1px solid red;
     margin-top: 45px;
 }
 
 .function{
-    width: 80%;
+    width: 85%;
     height: 100%;
-    background-color:white;
+    background-color: #FFFFFF;
     float: left;
+    position: relative;
 }
-
-.function button{
-    width: 80px;
-    height: 35px;
-    margin-left: 20px;
-    margin-top: 50px;
-    border: 1px solid red;
-    float: left;
-}
-
+/*当两个容器嵌套时,如果外层容器和内层容器之间**没有别的元素**,*/
+/*ff或chrome会把内层元素的margin-top作用于父元素。
+margin-bottom是下方的外边距，并不能让元素向下方移动，
+margin-top作为上边距，把元素“推”了下去。*/
 .search{
+    position: absolute;
     width: 250px;
-    height: 32px;
-    margin-top: 50px;
-    margin-left: 800px;
-    border: 1px solid red;
+    height: 40px;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 4px;
+    border: 1px solid #F2F2F2;
+    background-color: white;
     float: left;
 }
 
-.function input{
-    width: 80%;
-    height: 90%;
+.search select{
+    width: 30%;
+    height: 100%;
+    border: none;
     float: left;
 }
 
+.search input{
+    width: 50%;
+    height: 35px;
+    float: left;
+    margin-top: 2.50px;
+    border: none;
+}
 .search img{
-    height: 30px;
-    width: 30px;
-    border:1px solid black;
+    height: 100%;
+    width: 20%;
+    /*margin-top: 2.50px;*/
+    /*margin-left: 3px;*/
+    /*border:1px solid black;*/
     float: left;
+    cursor: pointer;
 }
+
 
 .dept{
-    width: 20%;
-    height: 100%;
-    background-color:green;
+    width: 15%;
+    height: 615px;;
+    background-color:#265380;
+    color: white;
     float: left;
 }
 
-li,a{
+.dept li{
     display: block;
     width: 100px;
     margin: 50px auto;
@@ -97,38 +116,104 @@ li a:hover {
 }
 
 .list{
-    width: 80%;
-    height: 100%;
-    background-color: blue;
+    width: 85%;
+    height: 615px;
+    background-color: #96B97D;
     float: left;
+    text-align: center;
 }  
 /* =====================表格属性====================== */
-.list td{
-    text-align: center;
+
+table {
+    width:100%;
+    border-collapse:collapse;
 }
 
-table,td,th
-{
-	border:1px solid black;
+.list td{
+    height: 60px;
 }
-table
-{
-	width:100%;
+
+tbody {
+    height: 535px;
+    width: 100%;
+    display: block;
+    overflow-y: scroll;
+    background-color: #DEE1E6;
 }
-th
-{
-	height:50px;
+
+table thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
+
+tbody tr{
+    border:1px solid #F1F3F4;
+}
+
+table thead {
+    width: calc(100% - 16.50px);
+    height:80px;
+    border:1px solid black;
+}
+
+table th {
+    border:1px solid  black;
+}
+/* ============================================== */
+
+.chice_box{
+    padding: 11px 6px 11px 6px;
+    display: flex;
+    /*注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。
+    Flex 布局非常有用，需要研究！！！*/
+    justify-content:space-around;
+    align-items: center;
+}
+
+.bt_add{
+    border-radius: 4px;
+    width: 80px;
+    height: 35px;
+    font-size: 16px;
+    background-color: #4CAF50;;
+    color: black;
+    text-decoration: none;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    float: left;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    line-height: 35px;
+/*在line-height==height即可文本垂直居中 */
+}
+
 
 .bt_change{
-    width: 60px;
-    height: 25px;
-    background-color: #4CAF50;
+    width: 80px;
+    height: 35px;
+    background-color: #389FD6;
+    color: white;
+    border: none;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    line-height: 35px;
 }
 
 .bt_delete{
-    width: 60px;
-    height: 25px;
+    width: 80px;
+    height: 35px;
+    border: none;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    line-height: 35px;
     background-color: red;
+    color: black;
+
 }
-/* ============================================== */
