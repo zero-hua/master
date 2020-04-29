@@ -11,7 +11,7 @@ spring:
   datasource:
     username: root
     password: forever
-    url: jdbc:mysql://localhost:3306/mysql_db?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/wall street masters?serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 5
@@ -38,6 +38,3 @@ spring:
     cache: false
   messages:
     basename: i18n.login
-#  mvc:
-#    static-path-pattern: /static/**
-#  如果使用自定义的路径，默认加载路径资源会失效

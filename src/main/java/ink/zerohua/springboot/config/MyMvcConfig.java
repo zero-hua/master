@@ -28,14 +28,11 @@ public class MyMvcConfig implements WebMvcConfigurer {
                 registry.addViewController("/main.html").setViewName("dashboard");
                 //       <a class="btn btn-sm" th:href="@{/index.html(l='zh_CN')}">中文</a>  对应！！！！！！！！！
             }
-            //注册拦截器
-            /**
-             * 在springboot2.0版本以前拦截器会默认对静态资源不拦截，但是springboot 2.0 以后拦截器会拦截所有，
-             * 所以需要重写addInterceptors方法，不管是自己的静态资源还是webjars中的资源，都要放行。
-             */
+
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
-                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns("/index.html","/loginCheck","/asserts/**","/webjars/**");
+                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
+                        .excludePathPatterns("/index.html","/loginCheck","/asserts/**","/webjars/**","/user/register.html","/register","/doRegister");
             }
         };
         return configurer;

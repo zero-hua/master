@@ -1,7 +1,7 @@
 /* 清除浏览器默认设置 */
 *{
     margin:0;
-    padding:0;   
+    padding:0;
     box-sizing: border-box;
 
 }
@@ -23,18 +23,11 @@ body{
     width: 100%;
 }
 
-/* height不能继承body
-    display:block 是每个标签成为独立的一个块，换行输出 ,相当于<br>
-    子元素继承父元素的属性，如有相同，则覆盖*/
-a:link{
-    color:white;
-}
-
-
 .user{
     width: 15%;
     height: 100%;
-    background-color: #265380;
+    color: #265380;
+    background-color: #eaf6ff;
     border-bottom: black 1px solid;
     float: left;
     text-align: center;
@@ -51,10 +44,7 @@ a:link{
     float: left;
     position: relative;
 }
-/*当两个容器嵌套时,如果外层容器和内层容器之间**没有别的元素**,*/
-/*ff或chrome会把内层元素的margin-top作用于父元素。
-margin-bottom是下方的外边距，并不能让元素向下方移动，
-margin-top作为上边距，把元素“推”了下去。*/
+
 .search{
     position: absolute;
     width: 250px;
@@ -84,44 +74,55 @@ margin-top作为上边距，把元素“推”了下去。*/
 .search img{
     height: 100%;
     width: 20%;
-    /*margin-top: 2.50px;*/
-    /*margin-left: 3px;*/
-    /*border:1px solid black;*/
     float: left;
     cursor: pointer;
 }
 
 
-.dept{
+.sidebar{
+    display: flex;
     width: 15%;
     height: 615px;;
-    background-color:#265380;
+    background-color:#eaf6ff;
     color: white;
     float: left;
 }
 
-.dept li{
-    display: block;
-    width: 100px;
-    margin: 50px auto;
-    text-align: center;
-    font-size: 20px;
-    border: #DEE1E6 solid 2px;
+.sidebar_second{
+    width: 70%;
+    height: 100%;
 }
 
+.sidebar_second li{
+    display: block;
+    width: 100%;
+    height: 40px;
+    margin: 30px auto;
+    text-align: center;
+    font-size: 20px;
+    border-top: #eaf6ff solid 1px;
+    border-bottom: #eaf6ff solid 1px;
+}
+
+.sidebar_second a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 40px;
+}
 /* 鼠标移动到选项上修改背景颜色 */
 li a:hover {
-    background-color: #555;
+    background-color: #DEE1E6;
     color: white;
 }
 
 .list{
     width: 85%;
     height: 615px;
-    background-color: #96B97D;
+    background-color: #DEE1E6;
     float: left;
     text-align: center;
-}  
+}
 /* =====================表格属性====================== */
 
 table {
@@ -153,20 +154,14 @@ tbody tr{
 
 table thead {
     width: calc(100% - 16.50px);
-    height:80px;
-    border:1px solid black;
-}
-
-table th {
-    border:1px solid  black;
+    height:70px;
+    border-bottom:1px solid black;
 }
 /* ============================================== */
 
 .chice_box{
     padding: 11px 6px 11px 6px;
     display: flex;
-    /*注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。
-    Flex 布局非常有用，需要研究！！！*/
     justify-content:space-around;
     align-items: center;
 }
@@ -187,7 +182,6 @@ table th {
     cursor: pointer;
     text-align: center;
     line-height: 35px;
-/*在line-height==height即可文本垂直居中 */
 }
 
 

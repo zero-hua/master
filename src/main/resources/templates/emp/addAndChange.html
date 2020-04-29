@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forever</title>
+    <link href="asserts/images/favicon.ico" th:href="@{/asserts/images/favicon.ico}" rel="shortcut icon" >
+    <title>Wall | 员工</title>
     <link href="add.css" th:href="@{/asserts/css/addAndCheck.css}" rel="stylesheet">
 </head>
 <body>
@@ -13,9 +14,6 @@
         区分：根据修改时拥有Employee对象而增加时没有进行区分
         thymeleaf th:if
         用post方法模拟put请求
-        在 th:if 方法所处的标签，true则生效
-        1 dates.format(employee.getBirthday(),'yyyy/MM/dd') 你是爹 yyyy/MM/dd 大小写错了你都是儿子！！！！
-        2 后台数据库存储也要注意 会默认减一天 22 会变 23
     -->
     <form th:action="@{/emp}" method="post">
             <input type="hidden" name="_method" value="put" th:if="${employee!=null}">

@@ -1,6 +1,10 @@
 package ink.zerohua.springboot.controller;
 
+import ink.zerohua.springboot.domain.User;
+import ink.zerohua.springboot.service.user.IUserService;
+import ink.zerohua.springboot.utils.CodeSHA256;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,12 +17,18 @@ import java.util.Map;
 //登录控制器
 public class LoginController {
 
+    @Autowired
+    IUserService userService;
+
     @PostMapping(value = "/loginCheck")
     public String loginCheck(@RequestParam("username")String username,
                              @RequestParam("password")String password,
                              HttpSession session, Map <String,Object> map){
         log.info("用户："+username+"登陆了");
-        if(!username.isEmpty() && password.equals("123456")){
+        User user = userService.findUser(username);
+        String pass = CodeSHA256.getSHA256Str(password);
+
+        if(username!=null && pass.equals(user.getPassword())){
             session.setAttribute("loginUser",username);
             //return "/main.html";
             return "redirect:/main";//重定向，防止刷新之后重复提交

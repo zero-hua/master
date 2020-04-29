@@ -3,21 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>员工管理页面</title>
+    <title>华尔街 | 员工管理页面</title>
     <link href="asserts/images/favicon.ico" th:href="@{/asserts/images/favicon.ico}" rel="shortcut icon" >
+    <link href="asserts/css/firstbar.css" th:href="@{/asserts/css/firstbar.css}" rel="stylesheet">
     <link href="asserts/css/empList.css" th:href="@{/asserts/css/empList.css}" rel="stylesheet">
-    <link href="/asserts/js/jquery-3.4.1.js" th:href="@{/webjars/jquery/3.4.1/jquery.js}" rel="script">
     <script type="text/javascript" src="asserts/js/jquery-3.4.1.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
-<!--    <link href="" th:href="@{/webjars/bootstrap/4.4.1-1/css/bootstrap.css}" rel="stylesheet">-->
-<!--    会修改默认的table属性-->
 </head>
 <body>
-
-<script>
-    $("#doSearch").click(function () {
-
-    })
-</script>
 
     <div class="header">
         <div class="user">
@@ -26,25 +18,26 @@
         <div class="function">
             <a class="bt_add" href="/emp" name="add">添加</a>
             <div class="search">
-                <input type="text" name="findDatils" placeholder="查询员工">
-                <select id="findCondition" class="">
+                <input type="text" id="findDatils" placeholder="查询员工">
+                <select id="findCondition">
                     <option value="1">按工号</option>
                     <option value="2">按姓名</option>
                 </select>
-                <!--图片的尺寸可以在标签里面设计好-->
-                <img id="doSearch" th:src="@{/asserts/images/search.png}" alt="搜索">
+                <a id="here" href="/emp"><img id="doSearch" th:src="@{/asserts/images/search.png}" alt="搜索"></a>
             </div>
         </div>
     </div>
     <div class="container">
-        <div class="dept">
-            <li><a id="all" href="/emps">总览</a></li>
-            <ul th:each="dept:${dpts}">
-                <li><a th:href="@{/emps/}+${dept.getDName()}" th:text="${dept.getDName()}">部门</a></li>
-            </ul>
+        <div class="sidebar">
+            <div th:replace="~{component/firstbar::sidebar_first}"></div>
+            <div class="sidebar_second">
+                <li><a id="all" href="/emps">总览</a></li>
+                <ul th:each="dept:${depts}">
+                    <li><a th:href="@{/emps/}+${dept.getDName()}" th:text="${dept.getDName()}">部门</a></li>
+                </ul>
+            </div>
         </div>
         <div class="list">
-            <!--#id .class  标签名-->
             <table id="emps_table">
                 <thead>
                     <tr>
@@ -67,7 +60,6 @@
                         <td th:text="${emp.getDept()}"></td>
                         <td class="chice_box">
                             <a  class="bt_change" name="change" th:href="@{/emp/}+${emp.getId()}" >修改</a>
-<!--                            <a class="bt_delete" th:attr="delete_uri=@{/emp/}+${emp.getId()}">删除</a>-->
                             <a class="bt_delete" th:attr="delete_uri=@{/emp/}+${emp.getId()}">删除</a>
                         </td>
                     </tr>
@@ -81,13 +73,18 @@
 
     <script>
         $(".bt_delete").click(function () {
+            alert("helo");
             $("#deleteEmp").attr("action",$(this).attr("delete_uri")).submit();
         });
+
+        $("#doSearch").click(function () {
+            if($("#findCondition option:selected").attr("value")==1){
+                $("#here").attr("href","/emp/i/"+$("#findDatils").val());
+            }else{
+                $("#here").attr("href","/emp/n/"+$("#findDatils").val());
+            }
+        });
     </script>
-<!--    HiddenHttpMethodFilter 在spring boot 2.0 之后默认关闭了，需要在application配置文件里手动开启
-         yml:  mvc:
-                hiddenmethod:
-                 filter:
-                    enabled: true-->
+
 </body>
 </html>

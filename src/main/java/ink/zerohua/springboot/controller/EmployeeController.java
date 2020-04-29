@@ -24,12 +24,6 @@ public class EmployeeController {
     @Autowired
     IDeptService deptService;
 
-//    final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
-    /*
-    * Model model ,此对象里面只能存储一个对象，不过包括了集合对象
-    * 方法里面的参数，只在一个page里面有用
-    * */
-
     //查询所有员工
     @GetMapping("/emps")
     public String findAll(Map<String,Object> map){
@@ -37,7 +31,7 @@ public class EmployeeController {
         map.put("emps",employees);
 
         List<Dept> depts = deptService.findAllDept();
-        map.put("dpts",depts);
+        map.put("depts",depts);
         return "emp/empList";
     }
 
@@ -47,7 +41,7 @@ public class EmployeeController {
         map.put("emps",employees);
 
         List<Dept> depts = deptService.findAllDept();
-        map.put("dpts",depts);
+        map.put("depts",depts);
         return "emp/empList";
     }
 
@@ -66,19 +60,20 @@ public class EmployeeController {
     @GetMapping("/emp/n/{name}")
     public String findEmpByName(@PathVariable("name")String name,Map<String,Object> map){
         List<Employee> employees = empService.findEmpByName(name);
-        map.put("employee",employees);
+        map.put("emps",employees);
         List<Dept> depts = deptService.findAllDept();
         map.put("depts",depts);
         return "emp/empList";
     }
 
     @GetMapping("/emp/i/{id}")
-    public String findEmpById2(@PathVariable("id") Integer id,Map<String,Object> map){
-        Employee employee = empService.findEmpById(id);
-        map.put("employee",employee);
+    public String findEmpById2(@PathVariable("id")Integer id,Map<String,Object> map){
+        Employee employees = empService.findEmpById(id);
+        log.info(employees.toString());
+        map.put("emps",employees);
         List<Dept> depts = deptService.findAllDept();
         map.put("depts",depts);
-        return "emp/addAndChange";
+        return "emp/empList";
     }
 
     @GetMapping("/emp")
