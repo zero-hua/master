@@ -35,7 +35,7 @@ public class EmployeeController {
         return "emp/empList";
     }
 
-    @GetMapping("emps/{dName}")
+    @GetMapping("/emps/{dName}")
     public String findOneDept(Map<String,Object> map,@PathVariable("dName") String dName){
         List<Employee> employees = empService.findOneDept(dName);
         map.put("emps",employees);
