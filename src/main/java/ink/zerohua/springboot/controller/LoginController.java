@@ -2,6 +2,7 @@ package ink.zerohua.springboot.controller;
 
 
 import ink.zerohua.springboot.service.user.IUserService;
+import ink.zerohua.springboot.utils.ImageCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -10,18 +11,48 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
 @Slf4j
 //登录控制器
+//@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
     IUserService userService;
+
+    @RequestMapping("/imgCode")
+    public void creatImgCode(HttpServletRequest request, HttpServletResponse response){
+        try {
+            response.setContentType("image/jpg");//设置相应类型,告诉浏览器输出的内容为图片
+            response.setHeader("Pragma", "No-cache");//设置响应头信息，告诉浏览器不要缓存此内容
+            response.setHeader("Cache-Control", "no-cache");
+            response.setDateHeader("Expire", 0);
+            ImageCode imageCode = new ImageCode();
+            imageCode.getCode(request, response);//输出验证码图片方法
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/imgCodeCheck")
+    public Boolean imgCodeCheck(@RequestParam("inputCode")String inputCode,
+                                HttpSession session){
+        String randCode = (String) session.getAttribute("randomCode");
+        if(randCode.equals(inputCode)){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     @PostMapping(value = "/loginCheck")
     public String loginCheck(@RequestParam("username")String username,
