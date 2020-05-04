@@ -10,10 +10,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,10 +40,13 @@ public class LoginController {
         }
     }
 
-    @RequestMapping("/imgCodeCheck")
-    public Boolean imgCodeCheck(@RequestParam("inputCode")String inputCode,
+    @ResponseBody
+    @RequestMapping("/imgCodeCheck/{inputCode}")
+    public boolean imgCodeCheck(@PathVariable("inputCode")String inputCode,
                                 HttpSession session){
+
         String randCode = (String) session.getAttribute("randomCode");
+
         if(randCode.equals(inputCode)){
             return true;
         }else {

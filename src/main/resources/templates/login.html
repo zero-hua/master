@@ -12,7 +12,7 @@
 <body>
     <!--templates需要模板引擎解析-->
     <div class="center">
-        <form action="/loginCheck" method="post">
+        <form action="/loginCheck"  method="post" id="LF">
             <h5 th:text="#{login.welcome}">欢迎,My master!</h5>
             <div th:if="${msg!=null}">
                 <p th:text="${msg}" style="color: red"></p>
@@ -24,12 +24,11 @@
             <input type="password" id="password" name="password">
 
             <div class="captcha">
-                <input type="text" name="inputCode" placeholder="表明你是人">
+                <input type="text" name="inputCode" id="inputCode" placeholder="表明你是人">
                 <img src="/imgCode" alt="验证码" id="code" onclick="loadXMLDoc()">
             </div>
 
-            <input type="submit" value="Submit" th:value="#{login.tip}">
-
+            <input type="button" value="Submit" id="submitBt" onclick="validateForm()"  th:value="#{login.tip}">
             <p>
                 <a href="/register">注册</a>
                 <a href="#">忘记密码</a>
@@ -40,6 +39,35 @@
     </div>
 
     <script>
+        function validateForm() {
+            var code = $("#inputCode").val();
+            var answer;
+            if (code == null || code == "") {
+                alert("验证码不能为空！");
+                return false;
+            }
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+                // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.open("GET", "/imgCodeCheck/" + code, true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function change() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    if (xmlhttp.response == "false") {
+                        alert("验证码错误！");
+                    }else {
+                        $("#LF").submit();
+                        //跳转页面
+                    }
+                }
+            }
+        }
+
         function loadXMLDoc() {
             var xmlhttp;
             if(window.XMLHttpRequest){
@@ -51,7 +79,6 @@
             }
             xmlhttp.onreadystatechange=function () {
                 if(xmlhttp.readyState==4 && xmlhttp.status==200){
-                    console.info("fdafa");
                     $("#code").attr("src", '/imgCode');
                 }
             }
