@@ -12,7 +12,7 @@
 <body>
     <!--templates需要模板引擎解析-->
     <div class="center">
-        <form action="/loginCheck"  method="post" id="LF">
+        <form action="/login/loginCheck"  method="post" id="LF">
             <h5 th:text="#{login.welcome}">欢迎,My master!</h5>
             <div th:if="${msg!=null}">
                 <p th:text="${msg}" style="color: red"></p>
@@ -25,7 +25,7 @@
 
             <div class="captcha">
                 <input type="text" name="inputCode" id="inputCode" placeholder="表明你是人">
-                <img src="/imgCode" alt="验证码" id="code" onclick="loadXMLDoc()">
+                <img src="/login/imgCode" alt="验证码" id="code" onclick="loadXMLDoc()">
             </div>
 
             <input type="button" value="Submit" id="submitBt" onclick="validateForm()"  th:value="#{login.tip}">
@@ -54,7 +54,7 @@
                 // IE6, IE5 浏览器执行代码
                 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            xmlhttp.open("GET", "/imgCodeCheck/" + code, true);
+            xmlhttp.open("GET", "/login/imgCodeCheck/" + code, true);
             xmlhttp.send();
             xmlhttp.onreadystatechange = function change() {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -79,10 +79,10 @@
             }
             xmlhttp.onreadystatechange=function () {
                 if(xmlhttp.readyState==4 && xmlhttp.status==200){
-                    $("#code").attr("src", '/imgCode');
+                    $("#code").attr("src", '/login/imgCode');
                 }
             }
-            xmlhttp.open("GET","/imgCode",true);
+            xmlhttp.open("GET","/login/imgCode",true);
             xmlhttp.send();
         }
 

@@ -36,3 +36,5 @@ spring:
     cache: false
   messages:
     basename: i18n.login
+server:
+  port: 80

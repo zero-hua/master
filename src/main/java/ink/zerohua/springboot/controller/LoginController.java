@@ -20,7 +20,7 @@ import java.util.Map;
 @Controller
 @Slf4j
 //登录控制器
-//@RequestMapping("/login")
+@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
@@ -54,7 +54,7 @@ public class LoginController {
         }
     }
 
-    @PostMapping(value = "/loginCheck")
+    @PostMapping("/loginCheck")
     public String loginCheck(@RequestParam("username")String username,
                              @RequestParam("password")String password,
                              HttpSession session, Map <String,Object> map){

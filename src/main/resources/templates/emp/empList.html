@@ -59,7 +59,7 @@
                         <td th:text="${emp.getEmail()}"></td>
                         <td th:text="${emp.getDept()}"></td>
                         <td class="chice_box">
-                            <a  class="bt_change" name="change" th:href="@{/emp/}+${emp.getId()}" >修改</a>
+                            <a  class="bt_change" name="change" th:href="@{'/emp/'+${emp.getId()}}" >修改</a>
                             <a class="bt_delete" th:attr="delete_uri=@{/emp/}+${emp.getId()}">删除</a>
                         </td>
                     </tr>
