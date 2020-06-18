@@ -15,7 +15,7 @@ public class SendSmsService {
 
     public static String sendSms(String phoneNumber){
 
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4G7y6hwmB1vu28XsvnM3", "FkP5SrIh9Bh6IcTFowm3SOPq8VmR5g");
+
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();
