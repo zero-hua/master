@@ -1,0 +1,21 @@
+.sidebar_first{
+    width: 30%;
+    height: 100%;
+    border-right: 1px #DEE1E6 solid;
+}
+
+.top_navigate li{
+    text-align: center;
+    height: 40px;
+    width: 100%;
+    border-bottom: 1px #DEE1E6 solid;
+}
+
+.top_navigate li a{
+    color: darkblue;
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 40px;
+    font-size: 15px;
+}

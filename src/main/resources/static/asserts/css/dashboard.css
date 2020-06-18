@@ -1,0 +1,79 @@
+/* 清除浏览器默认设置 */
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+
+}
+
+a{
+    text-decoration: none;
+}
+
+body{
+    background-color: #DEE1E6;
+}
+
+.header{
+    width: 100%;
+    height: 100px;
+}
+
+.container{
+    width: 100%;
+}
+
+a:link{
+    color:white;
+}
+
+
+.user{
+    width: 15%;
+    height: 100%;
+    background-color: #265380;
+    border-bottom: black 1px solid;
+    float: left;
+    text-align: center;
+}
+
+.user p{
+    margin-top: 45px;
+}
+
+.function{
+    width: 85%;
+    height: 100%;
+    background-color: #FFFFFF;
+    float: left;
+    position: relative;
+}
+
+.sidebar{
+    display: flex;
+    width: 15%;
+    height: 615px;;
+    background-color:#265380;
+    color: white;
+    float: left;
+}
+
+.sidebar_second{
+    width: 70%;
+    height: 100%;
+    border: 1px red solid;
+}
+/* 鼠标移动到选项上修改背景颜色 */
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+.list{
+    width: 85%;
+    height: 615px;
+    background-color: #DEE1E6;
+    float: left;
+    text-align: center;
+}
+
